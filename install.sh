@@ -113,7 +113,7 @@ clone_repo(){
     rm "$TMP_FILE"
     echo "当前最新V2Ray版本为$RELEASE_LATEST"
     Download latest release
-    DOWNLOAD_LINK="https://https://github.com/XTLS/Xray-core/releases/download/$RELEASE_LATEST/Xray-linux-64.zip"
+    DOWNLOAD_LINK="https://objects.githubusercontent.com/github-production-release-asset-2e65be/311315731/002ecf4b-4aae-4092-99db-1c510c8e0b06?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20220514%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220514T101152Z&X-Amz-Expires=300&X-Amz-Signature=fa956b9013ff2da6438de6ad92e0ab9add413771e1373329e7368a0c9313e4b1&X-Amz-SignedHeaders=host&actor_id=70817988&key_id=0&repo_id=311315731&response-content-disposition=attachment%3B%20filename%3DXray-linux-64.zip&response-content-type=application%2Foctet-stream"
     if ! curl -L -H 'Cache-Control: no-cache' -o "latest-v2ray.zip" "$DOWNLOAD_LINK"; then
         echo 'error: 下载V2Ray失败，请重试'
         return 1
