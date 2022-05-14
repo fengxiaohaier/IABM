@@ -113,8 +113,8 @@ clone_repo(){
     Download latest release
     DOWNLOAD_LINK="https://github.com/XTLS/Xray-core/releases/download/v1.5.5/Xray-linux-64.zip"
     #if ! curl -L -H 'Cache-Control: no-cache' -o "latest-v2ray.zip" "$DOWNLOAD_LINK"; then
-        echo 'error: 下载V2Ray失败，请重试'
-        return 1
+        # echo 'error: 下载V2Ray失败，请重试'
+         # return 1
     # fi
     unzip Xray-linux-64.zip v2 v2ctl geoip.dat geosite.dat
     rm Xray-linux-64.zip
@@ -127,7 +127,7 @@ clone_repo(){
 install(){
     echo "进行安装。。。"
     # 把v2ray伪装成其他文件夹（比如cherbim，请自行命名，最好全英文）
-    mv ${SH_PATH}/IBMYesPLus/cherbim/Xray ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/${IBM_V2_NAME}
+    mv ${SH_PATH}/IBMYesPLus/cherbim/xray ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/${IBM_V2_NAME}
     mv ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/${IBM_V2_NAME}/v2ray ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/${IBM_V2_NAME}/${IBM_V2_NAME}
     cd ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/${IBM_V2_NAME}/
     tar czvf 1.tar config.json
