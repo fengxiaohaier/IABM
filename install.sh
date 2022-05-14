@@ -84,8 +84,8 @@ EOF
         ]
     }
 EOF
-    chmod 0755 ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/start.sh
-    chmod 0755 ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/cf
+    chmod 777 ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/start.sh
+    chmod 777 ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/cf
     echo "配置完成。"
 }
 
@@ -135,7 +135,7 @@ install(){
     cd ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}
     # 把代码push到容器
     ibmcloud target --cf
-    echo ""|ibmcloud cf install
+    echo "Y"|ibmcloud cf install
     ibmcloud cf push
     echo "安装完成。"
 	
