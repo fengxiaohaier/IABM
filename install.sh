@@ -98,10 +98,10 @@ clone_repo(){
     cd IBMYesPLus
     git submodule update --init --recursive
     cd cherbim/v2ray
-    Upgrade V2Ray to the latest version
+    # Upgrade V2Ray to the latest version
     rm v2ray v2ctl
     
-    Script from https://github.com/v2fly/fhs-install-v2ray/blob/master/install-release.sh
+    Script from https://github.com/XTLS/Xray-core.git/master/install-release.sh
     Get V2Ray release version number
     TMP_FILE="$(mktemp)"
     if ! curl -s -o "$TMP_FILE" 'https://api.github.com/repos/v2fly/v2ray-core/releases/latest'; then
@@ -113,13 +113,13 @@ clone_repo(){
     rm "$TMP_FILE"
     echo "当前最新V2Ray版本为$RELEASE_LATEST"
     Download latest release
-    DOWNLOAD_LINK="https://github.com/v2fly/v2ray-core/releases/download/$RELEASE_LATEST/v2ray-linux-64.zip"
+    DOWNLOAD_LINK="https://https://github.com/XTLS/Xray-core/releases/download/$RELEASE_LATEST/Xray-linux-64.zip"
     if ! curl -L -H 'Cache-Control: no-cache' -o "latest-v2ray.zip" "$DOWNLOAD_LINK"; then
         echo 'error: 下载V2Ray失败，请重试'
         return 1
     fi
-    unzip latest-v2ray.zip v2ray v2ctl geoip.dat geosite.dat
-    rm latest-v2ray.zip
+    unzip latest-Xray.zip Xray v2ctl geoip.dat geosite.dat
+    rm Xray-linux-64.zip
     
     chmod 0755 ./*
     cd ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}
