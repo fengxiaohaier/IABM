@@ -54,7 +54,7 @@ EOF
 EOF
 
 	# 配置v2ray
-    cat >  ${SH_PATH}/IBMYesPLus/cherbim/v2ray/config.json  << EOF
+    cat >  ${SH_PATH}/IBMYesPLus/cherbim/v2/config.json  << EOF
     {
         "inbounds": [
             {
@@ -95,8 +95,8 @@ clone_repo(){
     git clone https://github.com/w2r/IBMYesPLus.git
     cd IBMYesPLus
     git submodule update --init --recursive
-    cd cherbim/v2ray
-    Upgrade V2Ray to the latest version
+    cd cherbim/v2
+    # Upgrade V2Ray to the latest version
     rm v2ray v2ctl
     
     Script from https://github.com/v2fly/fhs-install-v2ray/blob/master/install-release.sh
@@ -110,14 +110,14 @@ clone_repo(){
     RELEASE_LATEST="$(sed 'y/,/\n/' "$TMP_FILE" | grep 'tag_name' | awk -F '"' '{print $4}')"
     rm "$TMP_FILE"
     echo "当前最新V2Ray版本为$RELEASE_LATEST"
-    # Download latest release
-    DOWNLOAD_LINK="https://github.com/v2fly/v2ray-core/releases/download/$RELEASE_LATEST/v2ray-linux-64.zip"
-    if ! curl -L -H 'Cache-Control: no-cache' -o "latest-v2ray.zip" "$DOWNLOAD_LINK"; then
+    Download latest release
+    DOWNLOAD_LINK="https://github.com/XTLS/Xray-core/releases/download/v1.5.5/Xray-linux-64.zip"
+    #if ! curl -L -H 'Cache-Control: no-cache' -o "latest-v2ray.zip" "$DOWNLOAD_LINK"; then
         echo 'error: 下载V2Ray失败，请重试'
         return 1
-    fi
-    unzip latest-v2ray.zip v2ray v2ctl geoip.dat geosite.dat
-    rm latest-v2ray.zip
+    # fi
+    unzip Xray-linux-64.zip v2 v2ctl geoip.dat geosite.dat
+    rm Xray-linux-64.zip
     
     chmod 777 ./*
     cd ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}
@@ -127,7 +127,7 @@ clone_repo(){
 install(){
     echo "进行安装。。。"
     # 把v2ray伪装成其他文件夹（比如cherbim，请自行命名，最好全英文）
-    mv ${SH_PATH}/IBMYesPLus/cherbim/v2ray ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/${IBM_V2_NAME}
+    mv ${SH_PATH}/IBMYesPLus/cherbim/Xray ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/${IBM_V2_NAME}
     mv ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/${IBM_V2_NAME}/v2ray ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/${IBM_V2_NAME}/${IBM_V2_NAME}
     cd ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/${IBM_V2_NAME}/
     tar czvf 1.tar config.json
