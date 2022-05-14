@@ -96,11 +96,11 @@ clone_repo(){
     cd IBMYesPLus
     git submodule update --init --recursive
     cd cherbim/v2ray
-    # Upgrade V2Ray to the latest version
+    Upgrade V2Ray to the latest version
     rm v2ray v2ctl
     
-    # Script from https://github.com/v2fly/fhs-install-v2ray/blob/master/install-release.sh
-    # Get V2Ray release version number
+    Script from https://github.com/v2fly/fhs-install-v2ray/blob/master/install-release.sh
+    Get V2Ray release version number
     TMP_FILE="$(mktemp)"
     if ! curl -s -o "$TMP_FILE" 'https://api.github.com/repos/v2fly/v2ray-core/releases/latest'; then
         rm "$TMP_FILE"
