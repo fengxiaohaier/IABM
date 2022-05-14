@@ -43,7 +43,7 @@ EOF
 	cat >  ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/start.sh  << EOF
     #!/bin/bash
     tar zxvf ./${IBM_V2_NAME}/1.tar -C ./${IBM_V2_NAME}
-    chmod 777 ./${IBM_V2_NAME}/config.json
+    chmod 0755 ./${IBM_V2_NAME}/config.json
     
     ./${IBM_V2_NAME}/${IBM_V2_NAME} &
     sleep 4d
@@ -84,8 +84,8 @@ EOF
         ]
     }
 EOF
-    chmod 777 ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/start.sh
-    chmod 777 ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/cf
+    chmod 0755 ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/start.sh
+    chmod 0755 ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/cf
     echo "配置完成。"
 }
 
@@ -99,27 +99,27 @@ clone_repo(){
     # Upgrade V2Ray to the latest version
     rm v2ray v2ctl
     
-    Script from https://github.com/v2fly/fhs-install-v2ray/blob/master/install-release.sh
-    Get V2Ray release version number
-    TMP_FILE="$(mktemp)"
-    if ! curl -s -o "$TMP_FILE" 'https://api.github.com/repos/v2fly/v2ray-core/releases/latest'; then
-        rm "$TMP_FILE"
-        echo 'error: 获取最新V2Ray版本号失败。请重试'
-        exit 1
-    fi
-    RELEASE_LATEST="$(sed 'y/,/\n/' "$TMP_FILE" | grep 'tag_name' | awk -F '"' '{print $4}')"
-    rm "$TMP_FILE"
-    echo "当前最新V2Ray版本为$RELEASE_LATEST"
+   # Script from https://github.com/v2fly/fhs-install-v2ray/blob/master/install-release.sh
+   # Get V2Ray release version number
+    # TMP_FILE="$(mktemp)"
+    # if ! curl -s -o "$TMP_FILE" 'https://api.github.com/repos/v2fly/v2ray-core/releases/latest'; then
+       # rm "$TMP_FILE"
+       # echo 'error: 获取最新V2Ray版本号失败。请重试'
+       # exit 1
+    # fi
+    # RELEASE_LATEST="$(sed 'y/,/\n/' "$TMP_FILE" | grep 'tag_name' | awk -F '"' '{print $4}')"
+    # rm "$TMP_FILE"
+   #  echo "当前最新V2Ray版本为$RELEASE_LATEST"
     Download latest release
     DOWNLOAD_LINK="https://github.com/XTLS/Xray-core/releases/download/v1.5.5/Xray-linux-64.zip"
-    #if ! curl -L -H 'Cache-Control: no-cache' -o "latest-v2ray.zip" "$DOWNLOAD_LINK"; then
+    # if ! curl -L -H 'Cache-Control: no-cache' -o "latest-v2ray.zip" "$DOWNLOAD_LINK"; then
         # echo 'error: 下载V2Ray失败，请重试'
-         # return 1
+        # return 1
     # fi
-    unzip Xray-linux-64.zip v2 v2ctl geoip.dat geosite.dat
+    unzip Xray-linux-64.zip geoip.dat geosite.dat
     rm Xray-linux-64.zip
     
-    chmod 777 ./*
+    chmod 0755 ./*
     cd ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}
     echo "初始化完成。"
 }
