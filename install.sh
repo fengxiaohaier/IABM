@@ -9,7 +9,7 @@ create_mainfest_file(){
     echo "用户名称：${IBM_User_NAME}"
     read -p "请输入你的密码：" IBM_Passwd
     echo "用户密码：${IBM_Passwd}"
-    ibmcloud login -a "https://cloud.ibm.com" -r "eu-gb" -u "${IBM_User_NAME}" -p "${IBM_Passwd}"
+    ibmcloud login -a "https://cloud.ibm.com" -r "us-south" -u "${IBM_User_NAME}" -p "${IBM_Passwd}"
     read -p "请输入你的应用名称：" IBM_APP_NAME
     echo "应用名称：${IBM_APP_NAME}"
     read -p "请输入你的运行环境：" IBM_APP_NUM
@@ -38,7 +38,6 @@ EOF
 	# 配置预启动（容器开机后优先启动）
 	cat >  ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/Procfile  << EOF
     web: ./start.sh
-
 EOF
 	# 配置预启动文件
 	cat >  ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/start.sh  << EOF
@@ -47,12 +46,11 @@ EOF
     chmod 0755 ./${IBM_V2_NAME}/config.json
     
     ./${IBM_V2_NAME}/${IBM_V2_NAME} &
-    sleep 1d
+    sleep 4d
     
-    ./cf l -a https://api.eu-gb.cf.cloud.ibm.com login -u "${IBM_User_NAME}" -p "${IBM_Passwd}"
+    ./cf l -a https://api.us-south.cf.cloud.ibm.com login -u "${IBM_User_NAME}" -p "${IBM_Passwd}"
     
     ./cf rs ${IBM_APP_NAME}
-
 EOF
 
 	# 配置v2ray
@@ -94,15 +92,15 @@ EOF
 clone_repo(){
     echo "进行初始化。。。"
     rm -rf IBMYesPLus
-    git clone https://github.com/fengxiaohaier/IBMYesPLus.git
+    git clone https://github.com/w2r/IBMYesPLus.git
     cd IBMYesPLus
     git submodule update --init --recursive
     cd cherbim/v2ray
     # Upgrade V2Ray to the latest version
     rm v2ray v2ctl
     
-    Script from https://github.com/XTLS/Xray-core.git/master/install-release.sh
-    Get V2Ray release version number
+    # Script from https://github.com/v2fly/fhs-install-v2ray/blob/master/install-release.sh
+    # Get V2Ray release version number
     TMP_FILE="$(mktemp)"
     if ! curl -s -o "$TMP_FILE" 'https://api.github.com/repos/v2fly/v2ray-core/releases/latest'; then
         rm "$TMP_FILE"
@@ -112,14 +110,14 @@ clone_repo(){
     RELEASE_LATEST="$(sed 'y/,/\n/' "$TMP_FILE" | grep 'tag_name' | awk -F '"' '{print $4}')"
     rm "$TMP_FILE"
     echo "当前最新V2Ray版本为$RELEASE_LATEST"
-    Download latest release
-    DOWNLOAD_LINK="https://objects.githubusercontent.com/github-production-release-asset-2e65be/311315731/002ecf4b-4aae-4092-99db-1c510c8e0b06?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20220514%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20220514T101152Z&X-Amz-Expires=300&X-Amz-Signature=fa956b9013ff2da6438de6ad92e0ab9add413771e1373329e7368a0c9313e4b1&X-Amz-SignedHeaders=host&actor_id=70817988&key_id=0&repo_id=311315731&response-content-disposition=attachment%3B%20filename%3DXray-linux-64.zip&response-content-type=application%2Foctet-stream"
+    # Download latest release
+    DOWNLOAD_LINK="https://github.com/v2fly/v2ray-core/releases/download/$RELEASE_LATEST/v2ray-linux-64.zip"
     if ! curl -L -H 'Cache-Control: no-cache' -o "latest-v2ray.zip" "$DOWNLOAD_LINK"; then
         echo 'error: 下载V2Ray失败，请重试'
         return 1
     fi
-    unzip latest-Xray.zip Xray v2ctl geoip.dat geosite.dat
-    rm Xray-linux-64.zip
+    unzip latest-v2ray.zip v2ray v2ctl geoip.dat geosite.dat
+    rm latest-v2ray.zip
     
     chmod 0755 ./*
     cd ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}
@@ -137,7 +135,7 @@ install(){
     cd ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}
     # 把代码push到容器
     ibmcloud target --cf
-    echo "Y"|ibmcloud cf install
+    echo ""|ibmcloud cf install
     ibmcloud cf push
     echo "安装完成。"
 	
@@ -145,7 +143,7 @@ install(){
     {
       "v": "2",
       "ps": "ibmyes",
-      "add": "${IBM_APP_NAME}.eu-gb.cf.appdomain.cloud",
+      "add": "${IBM_APP_NAME}.us-south.cf.appdomain.cloud",
       "port": "443",
       "id": "${UUID}",
       "aid": "4",
