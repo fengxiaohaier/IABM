@@ -137,7 +137,7 @@ install(){
     cd ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}
     # 把代码push到容器
     ibmcloud target --cf
-    echo "N"|ibmcloud cf install
+    echo "Y"|ibmcloud cf install
     ibmcloud cf push
     echo "安装完成。"
 	
