@@ -110,8 +110,8 @@ clone_repo(){
     # RELEASE_LATEST="$(sed 'y/,/\n/' "$TMP_FILE" | grep 'tag_name' | awk -F '"' '{print $4}')"
     # rm "$TMP_FILE"
    #  echo "当前最新V2Ray版本为$RELEASE_LATEST"
-    Download latest release
-    DOWNLOAD_LINK="https://github.com/XTLS/Xray-core/releases/download/v1.5.5/Xray-linux-64.zip"
+   # Download latest release
+    wget https://github.com/XTLS/Xray-core/releases/download/v1.5.5/Xray-linux-64.zip
     # if ! curl -L -H 'Cache-Control: no-cache' -o "latest-v2ray.zip" "$DOWNLOAD_LINK"; then
         # echo 'error: 下载V2Ray失败，请重试'
         # return 1
