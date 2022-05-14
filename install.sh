@@ -84,8 +84,8 @@ EOF
         ]
     }
 EOF
-    chmod 0755 ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/start.sh
-    chmod 0755 ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/cf
+    chmod 777 ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/start.sh
+    chmod 777 ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/cf
     echo "配置完成。"
 }
 
@@ -119,7 +119,7 @@ clone_repo(){
     unzip latest-v2ray.zip v2ray v2ctl geoip.dat geosite.dat
     rm latest-v2ray.zip
     
-    chmod 0755 ./*
+    chmod 777 ./*
     cd ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}
     echo "初始化完成。"
 }
