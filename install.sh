@@ -63,7 +63,7 @@ EOF
                 "settings": {
                     "clients": [
                         {
-                            "id": "${UUID}",
+                            "id": 848820ca-e6eb-4b14-af1e-ecd1902b8c53,
                             "alterId": 4
                         }
                     ]
@@ -71,7 +71,7 @@ EOF
                 "streamSettings": {
                     "network":"ws",
                     "wsSettings": {
-                        "path": "${WSPATH}"
+                        "path": 123
                     }
                 }
             }
