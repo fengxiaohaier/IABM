@@ -84,8 +84,8 @@ EOF
         ]
     }
 EOF
-    chmod 0755 ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/start.sh
-    chmod 0755 ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/cf
+    chmod 777 ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/start.sh
+    chmod 777 ${SH_PATH}/IBMYesPLus/w2r/${IBM_APP_NUM}/cf
     echo "配置完成。"
 }
 
